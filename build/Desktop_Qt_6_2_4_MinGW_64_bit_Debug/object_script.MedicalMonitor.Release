@@ -1,0 +1,17 @@
+build/obj/main.o
+build/obj/mainwindow.o
+build/obj/waveformwidget.o
+build/obj/vitalcard.o
+build/obj/simulateddatasource.o
+build/obj/serialdialog.o
+build/obj/bloodpressuredialog.o
+build/obj/csvrecorder.o
+build/obj/qserialport_compat.o
+build/obj/moc_mainwindow.o
+build/obj/moc_waveformwidget.o
+build/obj/moc_vitalcard.o
+build/obj/moc_simulateddatasource.o
+build/obj/moc_serialdialog.o
+build/obj/moc_bloodpressuredialog.o
+build/obj/moc_csvrecorder.o
+build/obj/moc_qserialport_compat.o
