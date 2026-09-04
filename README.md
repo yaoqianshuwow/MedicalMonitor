@@ -15,53 +15,7 @@
 - CSV 连续保存模拟采样；串口模式下保存带时间戳的原始十六进制字节；
 - 退出时停止定时器、刷新并关闭 CSV、关闭串口。
 
-## 已验证 Kit
 
-- Qt：6.2.4 Open Source，`C:\Qt\6.2.4\mingw_64`
-- qmake：3.1，`C:\Qt\6.2.4\mingw_64\bin\qmake.exe`
-- 编译器：MinGW-w64 11.2.0，`C:\Qt\Tools\mingw1120_64`
-- 必需模块：Core、Gui、Widgets；串口使用项目内 Win32 兼容层
-
-本机的 Qt 6.2.4 Kit 未安装可选的官方 Qt SerialPort 模块，所以工程默认启用 `compat/serialport`，仍能枚举、配置和打开 Windows COM 端口。如果 Kit 已安装官方模块，可给 qmake 增加 `CONFIG+=use_qt_serialport`，此时 `.pro` 会启用 `QT += serialport` 并排除兼容层。
-
-在 Qt Creator 中直接打开 `MedicalMonitor.pro`，选择 **Desktop Qt 6.2.4 MinGW 64-bit** Kit 后构建运行即可。
-
-## 命令行构建
-
-在 PowerShell 中运行：
-
-```powershell
-cd C:\Users\28407\Desktop\cpp\MedicalMonitor
-New-Item -ItemType Directory -Force build-release | Out-Null
-cd build-release
-& C:\Qt\6.2.4\mingw_64\bin\qmake.exe ..\MedicalMonitor.pro CONFIG+=release
-& C:\Qt\Tools\mingw1120_64\bin\mingw32-make.exe -j4
-```
-
-生成的程序位于 `build-release\bin\MedicalMonitor.exe`。在开发机运行前，把 Qt 与 MinGW 加入本次终端的 `PATH`：
-
-```powershell
-$env:Path = "C:\Qt\6.2.4\mingw_64\bin;C:\Qt\Tools\mingw1120_64\bin;" + $env:Path
-.\bin\MedicalMonitor.exe
-```
-
-如果要复制到没有安装 Qt 的电脑，在 `build-release` 目录执行：
-
-```powershell
-& C:\Qt\6.2.4\mingw_64\bin\windeployqt.exe --release .\bin\MedicalMonitor.exe
-```
-
-可选的自动化冒烟测试会在后台跑完一次 NIBP 充放气流程，同时记录模拟采样；成功时退出码为 0：
-
-```powershell
-.\bin\MedicalMonitor.exe --smoke-test .\smoke-test.csv
-```
-
-需要生成界面快照用于教学材料时，可运行：
-
-```powershell
-.\bin\MedicalMonitor.exe --screenshot .\monitor-preview.png
-```
 
 ## 使用说明
 
